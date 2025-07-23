@@ -53,6 +53,9 @@ public class PlayerScript : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
             rb.linearVelocity = direction * projectileSpeed;
+
+            //update fire time
+            lastFireTime = Time.time;
         }
     }
 
