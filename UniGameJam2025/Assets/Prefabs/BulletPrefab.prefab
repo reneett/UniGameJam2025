@@ -102,10 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825cb02ccfad45b4f965f69939e68416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1552266117755148615}
-  firePoint: {fileID: 0}
-  mainCam: {fileID: 0}
-  lifeTime: 3
 --- !u!50 &-1530136769615525069
 Rigidbody2D:
   serializedVersion: 5
