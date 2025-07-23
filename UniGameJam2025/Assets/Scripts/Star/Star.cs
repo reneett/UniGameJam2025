@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -7,14 +8,20 @@ public class Star : MonoBehaviour
     public float speed = 2f;
     private float currentSplineProgress = 0f;
 
+    public HealthBar healthBar;
+    public float maxHP = 100f;
+    public float currentHp;
+
     void Start()
     {
+        currentHp = maxHP;
+        healthBar.SetHealth(currentHp, maxHP);
         if (splineContainer)
         {
             transform.position = splineContainer.Spline.EvaluatePosition(0f);
         }
     }
-  void Update()
+    void Update()
     {
         if (splineContainer == null) return;
 
@@ -25,5 +32,35 @@ public class Star : MonoBehaviour
 
         Vector3 position = splineContainer.Spline.EvaluatePosition(currentSplineProgress);
         transform.position = position;
+    }
+
+    public void TakeDamage(float amount)
+    {
+        currentHp = Math.Max(0, currentHp - amount);
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHp, maxHP);
+        }
+
+        if (currentHp <= 0f)
+        {
+            Explode();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Projectile"))
+        {
+            Debug.Log("Collision Detected");
+            TakeDamage(20);
+            Destroy(collision.gameObject);
+        }
+    }
+
+  public void Explode()
+    {
+        Destroy(gameObject);
     }
 }
