@@ -162,7 +162,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3186758429465564643}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -179,7 +179,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1001 &7227943449367693012
 PrefabInstance:
@@ -241,6 +241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2679444795342727650, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3490359429238453919, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
       propertyPath: m_DrawMode
       value: 1
@@ -249,9 +253,17 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5606805671535612733, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7267076896018055192, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267076896018055192, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7267076896018055192, guid: 95bb5509a9ddfe948801d5aeba5e1cd2, type: 3}
       propertyPath: m_IsActive
