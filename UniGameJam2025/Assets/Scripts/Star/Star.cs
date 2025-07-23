@@ -8,14 +8,15 @@ public class Star : MonoBehaviour
     public float speed = 2f;
     private float currentSplineProgress = 0f;
 
-    public HealthBar healthBar;
+    public SpriteRenderer spriteRenderer;
+
+    // public HealthBar healthBar;
     public float maxHP = 100f;
     public float currentHp;
 
     void Start()
     {
         currentHp = maxHP;
-        healthBar.SetHealth(currentHp, maxHP);
         if (splineContainer)
         {
             transform.position = splineContainer.Spline.EvaluatePosition(0f);
@@ -32,21 +33,25 @@ public class Star : MonoBehaviour
 
         Vector3 position = splineContainer.Spline.EvaluatePosition(currentSplineProgress);
         transform.position = position;
+
     }
 
     public void TakeDamage(float amount)
     {
         currentHp = Math.Max(0, currentHp - amount);
-
-        if (healthBar != null)
-        {
-            healthBar.SetHealth(currentHp, maxHP);
-        }
-
+        // healthBar.SetHealth(currentHp, maxHP);
+        UpdateColor();
         if (currentHp <= 0f)
         {
             Explode();
         }
+    }
+
+    public void UpdateColor()
+    {
+        float damagePercent = 1f - (currentHp / maxHP);
+        Color color = Color.Lerp(Color.white, Color.red, damagePercent);
+        spriteRenderer.color = color;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
