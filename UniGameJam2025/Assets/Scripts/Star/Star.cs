@@ -54,7 +54,7 @@ public class Star : MonoBehaviour
         spriteRenderer.color = color;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Projectile"))
         {

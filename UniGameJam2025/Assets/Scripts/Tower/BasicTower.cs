@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -34,7 +35,7 @@ public class BasicTower : MonoBehaviour
     public List<Star> trackingStars; //list of currently tracked stars
     private Transform target; //current star being tracked
     private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
-    private String[] upgrades = new string[] {"Radius", "Speed", "Damage"};
+    private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
 
 
     void Start()
@@ -96,7 +97,7 @@ public class BasicTower : MonoBehaviour
         {
             float angle = MathF.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, 200f*Time.deltaTime);
+            rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, 200f * Time.deltaTime);
         }
     }
 
@@ -158,7 +159,7 @@ public class BasicTower : MonoBehaviour
             {
                 currentUpgrade = UnityEngine.Random.Range(1, 4);
             }
-            upgradeText.text = upgrades[currentUpgrade-1];
+            upgradeText.text = upgrades[currentUpgrade - 1];
             upgradeScreen.SetActive(true);
         }
 
@@ -185,5 +186,20 @@ public class BasicTower : MonoBehaviour
                 trackingStars.Remove(star);
             }
         }
+    }
+
+    public void StackFrost(float duration, float modifier)
+    {
+        if (freezable)
+        {
+            StartCoroutine(SetCooldown(duration, modifier));
+        }
+    }
+
+    IEnumerator SetCooldown(float duration, float modifier)
+    {
+        fireCooldown *= modifier;
+        yield return new WaitForSeconds(duration);
+        fireCooldown /= modifier;
     }
 }

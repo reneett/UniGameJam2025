@@ -440,6 +440,18 @@ PrefabInstance:
       propertyPath: starPrefab
       value: 
       objectReference: {fileID: 3186758429465564643, guid: 930cc7a42eb6efd438ad2e9f196fa318, type: 3}
+    - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3186758429465564643, guid: 930cc7a42eb6efd438ad2e9f196fa318, type: 3}
+    - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3163755662251142765, guid: 6e4765b39eba1214b9ac4d70d27e9577, type: 3}
     - target: {fileID: 3099758958622366315, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
       propertyPath: m_Name
       value: StarSpawner
@@ -570,6 +582,10 @@ PrefabInstance:
     - target: {fileID: 111884306812362724, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
       propertyPath: m_Name
       value: BasicTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 111884306812362724, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
+      propertyPath: m_TagString
+      value: Tower
       objectReference: {fileID: 0}
     - target: {fileID: 3928328156651131788, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
       propertyPath: m_LocalPosition.x

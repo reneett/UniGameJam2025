@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StarSpawner : MonoBehaviour
 {
-    public GameObject starPrefab;
+    public List<GameObject> enemyPrefabs;
     public SplineContainer path;
     public int numStars = 5;
 
@@ -27,7 +28,9 @@ public class StarSpawner : MonoBehaviour
 
     private void SpawnStar()
     {
-        GameObject star = Instantiate(starPrefab, transform.position, Quaternion.identity);
+        int rand = Random.Range(0, enemyPrefabs.Count);
+
+        GameObject star = Instantiate(enemyPrefabs[rand], transform.position, Quaternion.identity);
         Debug.Log("Star was instantiated");
 
         Star script = star.GetComponent<Star>();
