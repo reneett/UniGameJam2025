@@ -4,12 +4,17 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class BasicTower : MonoBehaviour
 {
 
     public Transform rotationPoint;
+
+    [SerializeField] private GameObject upgradeScreen;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private TMPro.TextMeshProUGUI upgradeText;
+    [SerializeField] private Button closeButton;
 
     //bullet vars stolen from Lia
     [SerializeField] private GameObject projectilePrefab;
@@ -19,18 +24,23 @@ public class BasicTower : MonoBehaviour
 
     [SerializeField] private CircleCollider2D detectionCollider;
     [SerializeField] public float radius = 5f; //tower circle collider size
+    [SerializeField] public float radiusModifier = 1.25f; //what the radius changes by
     [SerializeField] public float speed = 1f; //speed modifier, which decreases cooldown
+    [SerializeField] public float speedModifier = .95f; //what the speed decreases by
     [SerializeField] public float damage = 20f; //damage of each bullet
+    [SerializeField] public float damageModifier = 1.25f; //what the damage increases by
 
     public List<Star> trackingStars; //list of currently tracked stars
     private Transform target; //current star being tracked
+    private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
+    private String[] upgrades = new string[] {"Radius", "Speed", "Damage"};
 
 
     void Start()
     {
         target = null;
         detectionCollider = GetComponent<CircleCollider2D>();
-        
+
         if (detectionCollider != null)
         {
             detectionCollider.radius = radius;
@@ -39,6 +49,9 @@ public class BasicTower : MonoBehaviour
         {
             Debug.LogError("CircleCollider not found on this GameObject.");
         }
+        upgradeButton.onClick.AddListener(UpgradeController);
+        closeButton.onClick.AddListener(CloseUpgrader);
+
     }
 
     // Update is called once per frame
@@ -83,6 +96,70 @@ public class BasicTower : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, 200f*Time.deltaTime);
         }
+    }
+
+    public void UpgradeController()
+    {
+        Debug.Log("Upgrading");
+        switch (currentUpgrade)
+        {
+            case 1:
+                UpgradeRadius();
+                break;
+            case 2:
+                UpgradeSpeed();
+                break;
+            case 3:
+                UpgradeDamage();
+                break;
+            default:
+                Debug.Log("no current upgrade");
+                break;
+        }
+        currentUpgrade = 0;
+        CloseUpgrader();
+    }
+
+    private void UpgradeSpeed()
+    {
+        speed *= speedModifier;
+    }
+
+    private void UpgradeRadius()
+    {
+        radius *= radiusModifier;
+        UpdateCollider();
+    }
+
+    private void UpgradeDamage()
+    {
+        damage *= damageModifier;
+    }
+
+    private void UpdateCollider()
+    {
+        detectionCollider.radius = radius;
+    }
+
+    public void CloseUpgrader()
+    {
+        Debug.Log("Closing");
+        upgradeScreen.SetActive(false);
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("You clicked the tower");
+        if (!upgradeScreen.activeSelf)
+        {
+            if (currentUpgrade == 0)
+            {
+                currentUpgrade = UnityEngine.Random.Range(1, 4);
+            }
+            upgradeText.text = upgrades[currentUpgrade-1];
+            upgradeScreen.SetActive(true);
+        }
+
     }
 
     //when a star enters the trigger collider, add it to the list of stars being tracked
