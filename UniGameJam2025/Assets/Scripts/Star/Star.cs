@@ -14,8 +14,12 @@ public class Star : MonoBehaviour
     public float maxHP = 100f;
     public float currentHp;
 
+    //uimanager
+    private UIManager uiMan;
     void Start()
     {
+        uiMan = FindObjectOfType<UIManager>();
+
         currentHp = maxHP;
         if (splineContainer)
         {
@@ -43,6 +47,7 @@ public class Star : MonoBehaviour
         UpdateColor();
         if (currentHp <= 0f)
         {
+            uiMan.changeMoney(10);
             Explode();
         }
     }
