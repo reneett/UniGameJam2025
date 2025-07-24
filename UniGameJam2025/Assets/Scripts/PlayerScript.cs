@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private float fireCooldown = 1f; //seconds between shots
     private float lastFireTime = -Mathf.Infinity;     //time the last shot was fired
+    [SerializeField] private float bulletDamage = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +51,8 @@ public class PlayerScript : MonoBehaviour
             Quaternion bulletRotation = Quaternion.Euler(0, 0, bulletAngle);
 
             GameObject bullet = Instantiate(projectilePrefab, firePoint.position, bulletRotation);
+            bullet.GetComponent<BulletScript>().dmg = bulletDamage;
+
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
             rb.linearVelocity = direction * projectileSpeed;

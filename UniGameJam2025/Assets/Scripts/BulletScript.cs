@@ -4,6 +4,7 @@ public class BulletScript : MonoBehaviour
 {
     //bullet lifetime
     //[SerializeField] private float lifeTime = 3f;
+    public float dmg;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
