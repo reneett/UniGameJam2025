@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
 
         //bullet shoot
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastFireTime + fireCooldown)
+        if (Input.GetMouseButtonDown(1) && Time.time >= lastFireTime + fireCooldown)
         {
             Vector3 direction = (mouseWorldPos - firePoint.position).normalized;
 
