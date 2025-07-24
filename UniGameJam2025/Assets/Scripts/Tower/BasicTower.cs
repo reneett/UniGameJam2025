@@ -29,6 +29,7 @@ public class BasicTower : MonoBehaviour
     [SerializeField] public float speedModifier = .95f; //what the speed decreases by
     [SerializeField] public float damage = 20f; //damage of each bullet
     [SerializeField] public float damageModifier = 1.25f; //what the damage increases by
+    [SerializeField] public bool freezable = true;
 
     public List<Star> trackingStars; //list of currently tracked stars
     private Transform target; //current star being tracked
