@@ -66,6 +66,7 @@ public class BasicTower : MonoBehaviour
             float angle = MathF.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bullet = Instantiate(projectilePrefab, rotationPoint.position, targetRotation);
+            bullet.GetComponent<BulletScript>().dmg = damage;
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
             rb.linearVelocity = target.transform.position * projectileSpeed;
