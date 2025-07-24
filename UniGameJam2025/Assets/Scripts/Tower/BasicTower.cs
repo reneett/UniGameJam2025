@@ -13,18 +13,32 @@ public class BasicTower : MonoBehaviour
 
     //bullet vars stolen from Lia
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float projectileSpeed = 10f;
-
-    [SerializeField] private float fireCooldown = 1f; //seconds between shots
+    [SerializeField] public float projectileSpeed = 10f;
+    [SerializeField] public float fireCooldown = 1f; //seconds between shots
     private float lastFireTime = -Mathf.Infinity;     //time the last shot was fired
 
-    public List<Star> trackingStars;
-    private Transform target;
+    [SerializeField] private CircleCollider2D detectionCollider;
+    [SerializeField] public float radius = 5f; //tower circle collider size
+    [SerializeField] public float speed = 1f; //speed modifier, which decreases cooldown
+    [SerializeField] public float damage = 20f; //damage of each bullet
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public List<Star> trackingStars; //list of currently tracked stars
+    private Transform target; //current star being tracked
+
+
     void Start()
     {
         target = null;
+        detectionCollider = GetComponent<CircleCollider2D>();
+        
+        if (detectionCollider != null)
+        {
+            detectionCollider.radius = radius;
+        }
+        else
+        {
+            Debug.LogError("CircleCollider not found on this GameObject.");
+        }
     }
 
     // Update is called once per frame
@@ -45,6 +59,7 @@ public class BasicTower : MonoBehaviour
         }
     }
 
+    //finds the closest star within range
     private void FindNextStar()
     {
         if (trackingStars.Count() <= 0)
@@ -59,7 +74,7 @@ public class BasicTower : MonoBehaviour
         return;
     }
 
-
+    //rotates tower to be facing star
     private void RotateGun()
     {
         if (target != null)
@@ -70,6 +85,7 @@ public class BasicTower : MonoBehaviour
         }
     }
 
+    //when a star enters the trigger collider, add it to the list of stars being tracked
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Star"))
@@ -79,6 +95,7 @@ public class BasicTower : MonoBehaviour
         }
     }
 
+    //when a star exists the trigger collider, remove it from the list of stars being tracked
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Star"))
