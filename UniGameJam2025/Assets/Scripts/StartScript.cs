@@ -11,7 +11,7 @@ public class StartScript : MonoBehaviour
     [SerializeField] private Image background;
 
     [SerializeField] private TextMeshProUGUI creditText;
-    [SerializeField] private TextMeshProUGUI title;
+    //[SerializeField] private TextMeshProUGUI title;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,7 +22,7 @@ public class StartScript : MonoBehaviour
         play.gameObject.SetActive(true);
         credits.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        title.gameObject.SetActive(true);
+        //title.gameObject.SetActive(true);
 
         //back.enabled = false;
         //creditText.enabled = false;
@@ -45,7 +45,7 @@ public class StartScript : MonoBehaviour
     {
         play.gameObject.SetActive(false);
         credits.gameObject.SetActive(false);
-        title.gameObject.SetActive(false);
+        //title.gameObject.SetActive(false);
 
         back.gameObject.SetActive(true);
         creditText.gameObject.SetActive(true);
@@ -55,7 +55,7 @@ public class StartScript : MonoBehaviour
     {
         play.gameObject.SetActive(true);
         credits.gameObject.SetActive(true);
-        title.gameObject.SetActive(true);
+        //title.gameObject.SetActive(true);
 
         back.gameObject.SetActive(false);
         creditText.gameObject.SetActive(false);
