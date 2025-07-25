@@ -6,12 +6,17 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     [SerializeField] public Canvas canvas;
     [SerializeField] public CanvasGroup canvasGroup;
+    [SerializeField] private TMPro.TextMeshProUGUI radiusText;
+    [SerializeField] private TMPro.TextMeshProUGUI speedText;
+    [SerializeField] private TMPro.TextMeshProUGUI damageText;
     [SerializeField] public GameObject ghostTower;
     [SerializeField] public GameObject BasicTowerPrefab;
     [SerializeField] private UIManager uiManager;
     private GameObject ghost;
     private RectTransform towerTransform;
     private Vector2 originalPosition;
+
+    private BasicTower currentActive;
 
 
     private void Awake()
@@ -56,6 +61,7 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
                 uiManager.changeMoney(-100);
                 GameObject newTower = Instantiate(BasicTowerPrefab, ghost.transform.position, Quaternion.identity);
                 newTower.GetComponent<BasicTower>().uiManager = uiManager;
+                newTower.GetComponent<BasicTower>().towerHandler = this;
             }
         }
         else
@@ -68,5 +74,14 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("clicking on tower placer");
+    }
+
+    public void SwapTower(BasicTower newTower)
+    {
+        if (currentActive != null)
+        {
+            currentActive.CloseUpgrader();
+        }
+        currentActive = newTower;
     }
 }

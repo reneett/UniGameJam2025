@@ -20,6 +20,7 @@ public class BasicTower : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI upgradeCost;
     [SerializeField] private Button closeButton;
     public UIManager uiManager;
+    public TowerHandler towerHandler;
 
     //bullet vars stolen from Lia
     [SerializeField] private GameObject projectilePrefab;
@@ -41,6 +42,7 @@ public class BasicTower : MonoBehaviour
     public Transform target; //current star being tracked
     private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
+    public int[] upgradeLevels = new int[] { 1, 1, 1 };
     [SerializeField] public int currentCost = 25;
     
 
@@ -145,16 +147,19 @@ public class BasicTower : MonoBehaviour
     private void UpgradeSpeed()
     {
         speed *= speedModifier;
+        upgradeLevels[1] += 1;
     }
 
     private void UpgradeRadius()
     {
         radius *= radiusModifier;
+        upgradeLevels[0] += 1;
         UpdateCollider();
     }
 
     private void UpgradeDamage()
     {
+        upgradeLevels[2] += 1;
         damage *= damageModifier;
     }
 
@@ -188,6 +193,8 @@ public class BasicTower : MonoBehaviour
     {
         if (!upgradeScreen.activeSelf)
         {
+            towerHandler.SwapTower(this);
+            
             //display attack radius
             lineRenderer.enabled = true;
 
@@ -197,7 +204,7 @@ public class BasicTower : MonoBehaviour
             }
             upgradeText.text = upgrades[currentUpgrade - 1];
             upgradeCost.text = '$' + currentCost.ToString();
-            
+
             if (uiManager.currMoney < currentCost)
             {
                 upgradeButton.interactable = false;
