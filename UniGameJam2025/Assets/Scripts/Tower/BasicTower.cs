@@ -12,6 +12,8 @@ public class BasicTower : MonoBehaviour
 
     public Transform rotationPoint;
 
+
+    [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private GameObject upgradeScreen;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeText;
@@ -55,6 +57,13 @@ public class BasicTower : MonoBehaviour
         upgradeButton.onClick.AddListener(UpgradeController);
         closeButton.onClick.AddListener(CloseUpgrader);
 
+        //radius visual setup
+        lineRenderer.positionCount = 500 + 1; // +1 to close the circle
+        lineRenderer.loop = true;
+        lineRenderer.useWorldSpace = false; // local positions
+        lineRenderer.startColor = Color.green;
+        lineRenderer.endColor = Color.green;
+        DrawRadius();
     }
 
     // Update is called once per frame
@@ -143,17 +152,34 @@ public class BasicTower : MonoBehaviour
     private void UpdateCollider()
     {
         detectionCollider.radius = radius;
+        DrawRadius();
+    }
+
+    public void DrawRadius()
+    {
+        float angleStep = 360f / 500;
+        for (int i = 0; i <= 500; i++)
+        {
+            float angle = Mathf.Deg2Rad * i * angleStep;
+            float x = Mathf.Cos(angle) * radius;
+            float y = Mathf.Sin(angle) * radius;
+            lineRenderer.SetPosition(i, new Vector3(x, y, 0));
+        }
     }
 
     public void CloseUpgrader()
     {
         upgradeScreen.SetActive(false);
+        lineRenderer.enabled = false;
     }
 
     void OnMouseDown()
     {
         if (!upgradeScreen.activeSelf)
         {
+            //display attack radius
+            lineRenderer.enabled = true;
+
             if (currentUpgrade == 0)
             {
                 currentUpgrade = UnityEngine.Random.Range(1, 4);
