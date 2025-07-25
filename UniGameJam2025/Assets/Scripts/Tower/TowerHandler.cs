@@ -6,33 +6,57 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     [SerializeField] public Canvas canvas;
     [SerializeField] public CanvasGroup canvasGroup;
-    private Transform towerTransform;
-    private Transform originalPosition;
+    [SerializeField] public GameObject ghostTower;
+    [SerializeField] public GameObject BasicTowerPrefab;
+    private GameObject ghost;
+    private RectTransform towerTransform;
+    private Vector2 originalPosition;
 
 
     private void Awake()
     {
-        towerTransform = GetComponent<Transform>();
+        towerTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        originalPosition = towerTransform;
+        originalPosition = towerTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = .7f;
         canvasGroup.blocksRaycasts = false;
+
+        ghost = Instantiate(ghostTower);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        towerTransform.position += new Vector3(eventData.delta.x, eventData.delta.y, 0f) / canvas.scaleFactor;
+        towerTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(towerTransform.position);
+        worldPos.z = 0f;
+        ghost.transform.position = worldPos;
     }
 
+    //returns icon to original position when let go
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        towerTransform.position = originalPosition.position;
+        towerTransform.anchoredPosition = originalPosition;
+
+        //place a tower, depending on validity of position
+        var ghostScript = ghost.GetComponent<GhostTower>();
+
+        if (ghostScript.IsValid())
+        {
+            //spawn basic tower
+            Instantiate(BasicTowerPrefab, ghost.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("Invalid position, cancelling placement");
+        }
+        Destroy(ghost);
     }
 
     public void OnPointerDown(PointerEventData eventData)

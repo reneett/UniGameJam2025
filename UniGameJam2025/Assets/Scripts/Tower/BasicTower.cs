@@ -155,6 +155,7 @@ public class BasicTower : MonoBehaviour
         DrawRadius();
     }
 
+    //redraws the detection radius
     public void DrawRadius()
     {
         float angleStep = 360f / 500;
@@ -173,6 +174,7 @@ public class BasicTower : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
+    //opens the upgrade screen when selected
     public void Clicked()
     {
         if (!upgradeScreen.activeSelf)
