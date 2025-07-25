@@ -78,6 +78,7 @@ public class UIManager : MonoBehaviour
 
     public void progressWave()
     {
+        nextWave.gameObject.SetActive(false);
         currWave++;
         waveNum.text = "Wave " + currWave.ToString();
     }

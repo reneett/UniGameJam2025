@@ -2051,6 +2051,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 948427992921747883, guid: ace6bda4536d1ae4291c1102c5575405, type: 3}
     - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
+      propertyPath: nextButton
+      value: 
+      objectReference: {fileID: 1334740777}
+    - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
       propertyPath: starPrefab
       value: 
       objectReference: {fileID: 3186758429465564643, guid: 930cc7a42eb6efd438ad2e9f196fa318, type: 3}
@@ -2289,7 +2293,7 @@ MonoBehaviour:
   money: {fileID: 2058976020}
   health: {fileID: 37144884}
   waveNum: {fileID: 1333735656}
-  nextWave: {fileID: 0}
+  nextWave: {fileID: 1334740777}
   currMoney: 0
   currHealth: 10
   currWave: 1

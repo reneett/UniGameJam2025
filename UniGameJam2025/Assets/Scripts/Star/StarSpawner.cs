@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class StarSpawner : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class StarSpawner : MonoBehaviour
     public int waveIndex = 1;
     public bool isWaitingForPlayerReady;
     private HashSet<Star> liveStars = new HashSet<Star>();
+
+    //next button
+    [SerializeField] private Button nextButton;
 
     private void Start()
     {
@@ -62,6 +66,7 @@ public class StarSpawner : MonoBehaviour
             waveIndex++;
 
             // UI Manager Call here?
+            nextButton.gameObject.SetActive(true);
         }
     }
 }
