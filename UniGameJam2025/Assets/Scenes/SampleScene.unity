@@ -205,6 +205,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32326506}
   m_CullTransparentMesh: 1
+--- !u!1 &49591671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 49591673}
+  - component: {fileID: 49591672}
+  m_Layer: 7
+  m_Name: Tower map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!60 &49591672
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49591671}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 5.6944556, y: -2.1790116}
+      - {x: 2.6463666, y: -1.2123487}
+      - {x: -1.0107999, y: -0.76367426}
+      - {x: -5.684228, y: -1.7296367}
+      - {x: -8.542575, y: -2.996397}
+      - {x: -10.121554, y: -3.902071}
+      - {x: -9.296403, y: -5.2663403}
+      - {x: -6.349975, y: -3.4884133}
+      - {x: -3.6161237, y: -2.4028919}
+      - {x: -0.12679619, y: -2.0720046}
+      - {x: 3.4761324, y: -2.4190607}
+      - {x: 5.7367873, y: -3.5761275}
+      - {x: 6.9085197, y: -5.0419436}
+      - {x: 8.71768, y: -5.068419}
+      - {x: 8.631634, y: -0.7673274}
+      - {x: 6.9042306, y: 0.8186279}
+      - {x: 6.3299017, y: 0.39213353}
+      - {x: 3.00068, y: 1.602948}
+      - {x: -1.8431158, y: 1.6724205}
+      - {x: -4.72022, y: 1.2942443}
+      - {x: -7.0184884, y: 0.5210735}
+      - {x: -8.004532, y: 0.19458753}
+      - {x: -8.210614, y: 0.943622}
+      - {x: -7.135634, y: 2.1848965}
+      - {x: -4.4635353, y: 2.961435}
+      - {x: -0.93370926, y: 3.374849}
+      - {x: 2.3947067, y: 3.257944}
+      - {x: 4.4769793, y: 2.6854532}
+      - {x: 6.4773273, y: 1.2878962}
+      - {x: 8.748903, y: -0.6510248}
+      - {x: 8.585231, y: 5.17845}
+      - {x: 6.8176227, y: 5.28921}
+      - {x: 6.895462, y: 2.0823328}
+      - {x: 5.2258606, y: 3.3023746}
+      - {x: 2.2282348, y: 4.094384}
+      - {x: 0.99548185, y: 4.4163127}
+      - {x: -5.4042764, y: 3.944293}
+      - {x: -8.0571995, y: 2.7357786}
+      - {x: -9.460452, y: 1.2100148}
+      - {x: -8.895313, y: -0.6579337}
+      - {x: -7.402891, y: -0.63513196}
+      - {x: -4.304377, y: 0.49326628}
+      - {x: -0.8327705, y: 0.730826}
+      - {x: 0.9440877, y: 0.8341774}
+      - {x: 3.499333, y: 0.37830222}
+      - {x: 6.1818857, y: -0.9460154}
+      - {x: 6.887652, y: -2.5907817}
+  m_UseDelaunayMesh: 0
+--- !u!4 &49591673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49591671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3214482, y: -0.14105493, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &71238481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,6 +2655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8386157127907388701, guid: 7a95e7ddb36e8204b95c53dbcb13daa8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2548,3 +2678,4 @@ SceneRoots:
   - {fileID: 8994165478689744035}
   - {fileID: 139527160}
   - {fileID: 1451575997}
+  - {fileID: 49591673}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc91d304314ff4183498c0411c2f49, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  numStars: 0
+  numStars: 5
   spawnDelay: 0
+  speed: 1
