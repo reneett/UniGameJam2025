@@ -2051,6 +2051,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 948427992921747883, guid: ace6bda4536d1ae4291c1102c5575405, type: 3}
     - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
+      propertyPath: baseWave
+      value: 
+      objectReference: {fileID: 11400000, guid: edd72dfcbf550954793aa0258392b866, type: 2}
+    - target: {fileID: 2853163765890202062, guid: 4f8cba36fd276b147bb4febc5acaef32, type: 3}
       propertyPath: nextButton
       value: 
       objectReference: {fileID: 1334740777}
@@ -2290,6 +2294,7 @@ MonoBehaviour:
   pause: {fileID: 1135465382}
   resume: {fileID: 1845676926}
   pauseMenu: {fileID: 1294016028}
+  quit: {fileID: 256854388}
   money: {fileID: 2058976020}
   health: {fileID: 37144884}
   waveNum: {fileID: 1333735656}
