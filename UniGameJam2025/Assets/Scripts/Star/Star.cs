@@ -16,6 +16,7 @@ public class Star : MonoBehaviour
 
     //uimanager
     private UIManager uiMan;
+    public static event Action<Star> OnExplode;
     void Start()
     {
         uiMan = FindObjectOfType<UIManager>();
@@ -67,10 +68,17 @@ public class Star : MonoBehaviour
             TakeDamage(20);
             Destroy(collision.gameObject);
         }
+        if (collision.CompareTag("Earth"))
+        {
+            Debug.Log("Hit Earth");
+            uiMan.changeHealth(1);
+            Explode();
+        }
     }
 
   public void Explode()
     {
+        OnExplode?.Invoke(this);
         Destroy(gameObject);
     }
 }

@@ -2,15 +2,20 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class StarSpawner : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs;
+    public List<Star> enemies;
     public SplineContainer path;
-    public int numStars = 5;
+    public StarWave baseWave;
+    public int waveIndex = 1;
+    public bool isWaitingForPlayerReady;
+    private HashSet<Star> liveStars = new HashSet<Star>();
 
-    [Header("Spawn Delay Timer")]
-    public float spawnDelay = 1.0f;
+    //next button
+    [SerializeField] private Button nextButton;
 
     private void Start()
     {
@@ -19,11 +24,18 @@ public class StarSpawner : MonoBehaviour
 
     private IEnumerator SpawnStars()
     {
-        for (int i = 0; i < numStars; ++i)
+        int numStars = baseWave.numStars;
+        float spawnDelay = baseWave.spawnDelay;
+        for (int i = 0; i < numStars * waveIndex; ++i)
         {
             SpawnStar();
             yield return new WaitForSeconds(spawnDelay);
         }
+    }
+
+    public void SpawnNextWave()
+    {
+        StartCoroutine(SpawnStars());
     }
 
     private void SpawnStar()
@@ -37,6 +49,29 @@ public class StarSpawner : MonoBehaviour
         if (script != null && path != null)
         {
             script.splineContainer = path;
+            enemies.Add(script);
+        }
+    }
+
+    private void OnEnable()
+    {
+        Star.OnExplode += HandleStarExplode;
+    }
+
+    private void OnDisable()
+    {
+        Star.OnExplode -= HandleStarExplode;
+    }
+    private void HandleStarExplode(Star star)
+    {
+        liveStars.Remove(star);
+        if (liveStars.Count == 0)
+        {
+            Debug.Log("Wave Won!");
+            waveIndex++;
+
+            // UI Manager Call here?
+            nextButton.gameObject.SetActive(true);
         }
     }
 }

@@ -8,11 +8,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button pause;
     [SerializeField] private Button resume;
     [SerializeField] private Image pauseMenu;
+    [SerializeField] private Image quit;
 
     //stat UI vars
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI waveNum;
+
+    [SerializeField] private Button nextWave;
 
     //stat vars
     public int currMoney = 100;
@@ -24,7 +27,9 @@ public class UIManager : MonoBehaviour
     {
         pause.gameObject.SetActive(true);
         resume.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
+        nextWave.gameObject.SetActive(false);
 
         money.text = currMoney.ToString();
         health.text = currHealth.ToString();
@@ -43,6 +48,7 @@ public class UIManager : MonoBehaviour
 
         pause.gameObject.SetActive(false);
         resume.gameObject.SetActive(true);
+        quit.gameObject.SetActive(true);
         pauseMenu.gameObject.SetActive(true);
     }
 
@@ -52,7 +58,15 @@ public class UIManager : MonoBehaviour
 
         pause.gameObject.SetActive(true);
         resume.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
+    }
+
+    public void clickQuit()
+    {
+        Application.Quit();
+
+        //if testing in editor, use: UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void changeMoney(int addMoney)
@@ -62,12 +76,13 @@ public class UIManager : MonoBehaviour
     }
     public void changeHealth(int loseHealth)
     {
-        currHealth += loseHealth;
+        currHealth -= loseHealth;
         health.text = currHealth.ToString();
     }
 
     public void progressWave()
     {
+        nextWave.gameObject.SetActive(false);
         currWave++;
         waveNum.text = "Wave " + currWave.ToString();
     }
