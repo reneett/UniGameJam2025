@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     }
     public void changeHealth(int loseHealth)
     {
-        currHealth += loseHealth;
+        currHealth -= loseHealth;
         health.text = currHealth.ToString();
     }
 

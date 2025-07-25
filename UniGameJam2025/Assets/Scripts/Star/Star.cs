@@ -67,6 +67,12 @@ public class Star : MonoBehaviour
             TakeDamage(20);
             Destroy(collision.gameObject);
         }
+        if (collision.CompareTag("Earth"))
+        {
+            Debug.Log("Hit Earth");
+            uiMan.changeHealth(1);
+            Explode();
+        }
     }
 
   public void Explode()
