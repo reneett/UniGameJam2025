@@ -32,6 +32,7 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
+        towerTransform.position = originalPosition.position;
     }
 
     public void OnPointerDown(PointerEventData eventData)

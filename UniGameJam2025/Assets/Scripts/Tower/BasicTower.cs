@@ -173,7 +173,7 @@ public class BasicTower : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
-    void OnMouseDown()
+    public void Clicked()
     {
         if (!upgradeScreen.activeSelf)
         {
