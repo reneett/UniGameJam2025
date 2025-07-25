@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button pause;
     [SerializeField] private Button resume;
     [SerializeField] private Image pauseMenu;
+    [SerializeField] private Image quit;
 
     //stat UI vars
     [SerializeField] private TextMeshProUGUI money;
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         pause.gameObject.SetActive(true);
         resume.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         nextWave.gameObject.SetActive(false);
 
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
 
         pause.gameObject.SetActive(false);
         resume.gameObject.SetActive(true);
+        quit.gameObject.SetActive(true);
         pauseMenu.gameObject.SetActive(true);
     }
 
@@ -55,6 +58,7 @@ public class UIManager : MonoBehaviour
 
         pause.gameObject.SetActive(true);
         resume.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
     }
 
