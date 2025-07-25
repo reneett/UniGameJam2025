@@ -142,10 +142,10 @@ public class BasicTower : MonoBehaviour
                 Debug.Log("no current upgrade");
                 break;
         }
-        uiManager.changeMoney(-1*currentCost);
+        CloseUpgrader();
+        uiManager.changeMoney(-currentCost);
         currentCost = (int) (currentCost * 1.5);
         currentUpgrade = 0;
-        CloseUpgrader();
     }
 
     private void UpgradeSpeed()
