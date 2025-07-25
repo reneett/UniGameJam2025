@@ -51,7 +51,7 @@ MonoBehaviour:
   splineContainer: {fileID: 0}
   speed: 2
   spriteRenderer: {fileID: 6936713139364356563}
-  maxHP: 100
+  maxHP: 1
   currentHp: 0
 --- !u!212 &6936713139364356563
 SpriteRenderer:
