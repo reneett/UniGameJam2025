@@ -38,6 +38,7 @@ public class StartScript : MonoBehaviour
 
     public void startGame()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene("SampleScene");
     }
 
