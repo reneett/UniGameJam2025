@@ -83,5 +83,9 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
             currentActive.CloseUpgrader();
         }
         currentActive = newTower;
+
+        radiusText.text = currentActive.upgradeLevels[0].ToString();
+        speedText.text = currentActive.upgradeLevels[1].ToString();
+        damageText.text = currentActive.upgradeLevels[2].ToString();
     }
 }
