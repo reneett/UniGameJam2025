@@ -55,6 +55,13 @@ public class UIManager : MonoBehaviour
         pauseMenu.gameObject.SetActive(false);
     }
 
+    public void clickQuit()
+    {
+        Application.Quit();
+
+        //if testing in editor, use: UnityEditor.EditorApplication.isPlaying = false;
+    }
+
     public void changeMoney(int addMoney)
     {
         currMoney += addMoney;

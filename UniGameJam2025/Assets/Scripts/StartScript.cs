@@ -60,4 +60,11 @@ public class StartScript : MonoBehaviour
         back.gameObject.SetActive(false);
         creditText.gameObject.SetActive(false);
     }
+
+    public void clickQuit()
+    {
+        Application.Quit();
+
+        //if testing in editor, use: UnityEditor.EditorApplication.isPlaying = false;
+    }
 }
