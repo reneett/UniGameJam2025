@@ -17,29 +17,32 @@ public class BasicTower : MonoBehaviour
     [SerializeField] private GameObject upgradeScreen;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeText;
+    [SerializeField] private TMPro.TextMeshProUGUI upgradeCost;
     [SerializeField] private Button closeButton;
+    public UIManager uiManager;
 
     //bullet vars stolen from Lia
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] public float projectileSpeed = 10f;
-    [SerializeField] public float fireCooldown = 1f; //seconds between shots
+    public float projectileSpeed = 10f;
+    public float fireCooldown = 1f; //seconds between shots
     private float lastFireTime = -Mathf.Infinity;     //time the last shot was fired
 
     [SerializeField] private CircleCollider2D detectionCollider;
-    [SerializeField] public float radius = 5f; //tower circle collider size
-    [SerializeField] public float radiusModifier = 1.25f; //what the radius changes by
-    [SerializeField] public float speed = 1f; //speed modifier, which decreases cooldown
-    [SerializeField] public float speedModifier = .95f; //what the speed decreases by
-    [SerializeField] public float damage = 20f; //damage of each bullet
-    [SerializeField] public float damageModifier = 1.25f; //what the damage increases by
-    [SerializeField] public bool freezable = true;
+    public float radius = 5f; //tower circle collider size
+    public float radiusModifier = 1.25f; //what the radius changes by
+    public float speed = 1f; //speed modifier, which decreases cooldown
+    public float speedModifier = .95f; //what the speed decreases by
+    public float damage = 20f; //damage of each bullet
+    public float damageModifier = 1.25f; //what the damage increases by
+    public bool freezable = true;
     private int frozen = 0;
 
     public List<Star> trackingStars; //list of currently tracked stars
     public Transform target; //current star being tracked
     private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
-
+    [SerializeField] public int currentCost = 25;
+    
 
     void Start()
     {
@@ -74,6 +77,18 @@ public class BasicTower : MonoBehaviour
             rb.freezeRotation = true;
             rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileSpeed;
             lastFireTime = Time.time;
+        }
+
+        if (upgradeScreen.activeSelf)
+        { 
+            if (uiManager.currMoney < currentCost)
+            {
+                upgradeButton.interactable = false;
+            }
+            else
+            {
+                upgradeButton.interactable = true;
+            }
         }
     }
 
@@ -121,6 +136,8 @@ public class BasicTower : MonoBehaviour
                 Debug.Log("no current upgrade");
                 break;
         }
+        uiManager.changeMoney(-1*currentCost);
+        currentCost = (int) (currentCost * 1.5);
         currentUpgrade = 0;
         CloseUpgrader();
     }
@@ -179,6 +196,16 @@ public class BasicTower : MonoBehaviour
                 currentUpgrade = UnityEngine.Random.Range(1, 4);
             }
             upgradeText.text = upgrades[currentUpgrade - 1];
+            upgradeCost.text = '$' + currentCost.ToString();
+            
+            if (uiManager.currMoney < currentCost)
+            {
+                upgradeButton.interactable = false;
+            }
+            else
+            {
+                upgradeButton.interactable = true;
+            }
             upgradeScreen.SetActive(true);
         }
 

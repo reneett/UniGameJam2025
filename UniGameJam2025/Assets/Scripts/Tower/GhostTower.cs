@@ -6,6 +6,7 @@ public class GhostTower : MonoBehaviour
     [SerializeField] public LayerMask towerLayer;
     [SerializeField] private BoxCollider2D baseCollider;
     [SerializeField] private SpriteRenderer radius;
+    public int towerCost = 100;
     public Color yesPlace;
     public Color noPlace;
 

@@ -8,6 +8,7 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     [SerializeField] public CanvasGroup canvasGroup;
     [SerializeField] public GameObject ghostTower;
     [SerializeField] public GameObject BasicTowerPrefab;
+    [SerializeField] private UIManager uiManager;
     private GameObject ghost;
     private RectTransform towerTransform;
     private Vector2 originalPosition;
@@ -49,8 +50,13 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
         if (ghostScript.IsValid())
         {
-            //spawn basic tower
-            Instantiate(BasicTowerPrefab, ghost.transform.position, Quaternion.identity);
+            if (uiManager.currMoney >= 100)
+            {
+                //spawn basic tower, and subtract cost
+                uiManager.changeMoney(-100);
+                GameObject newTower = Instantiate(BasicTowerPrefab, ghost.transform.position, Quaternion.identity);
+                newTower.GetComponent<BasicTower>().uiManager = uiManager;
+            }
         }
         else
         {

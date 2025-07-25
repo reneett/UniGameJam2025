@@ -54,7 +54,9 @@ MonoBehaviour:
   upgradeScreen: {fileID: 5203041573766747922}
   upgradeButton: {fileID: 3893198910925999731}
   upgradeText: {fileID: 1935213135278149092}
+  upgradeCost: {fileID: 5755620384737740540}
   closeButton: {fileID: 7932328543527043420}
+  uiManager: {fileID: 0}
   projectilePrefab: {fileID: 1552266117755148615, guid: 7c12748f7d7968045a4538ffa1a85225, type: 3}
   projectileSpeed: 10
   fireCooldown: 1
@@ -68,6 +70,7 @@ MonoBehaviour:
   freezable: 1
   trackingStars: []
   target: {fileID: 0}
+  currentCost: 25
 --- !u!120 &4577729301449285721
 LineRenderer:
   serializedVersion: 2
@@ -488,7 +491,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 0.6839622, b: 0.6839622, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:

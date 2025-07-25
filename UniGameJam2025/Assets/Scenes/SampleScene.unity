@@ -903,6 +903,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726297987}
   m_CullTransparentMesh: 1
+--- !u!114 &1924615996 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 992661816765952859, guid: 7a95e7ddb36e8204b95c53dbcb13daa8, type: 3}
+  m_PrefabInstance: {fileID: 8994165478689744035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1814b0a1253e13840a1727f61396dfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!223 &1924616000 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 5730029830872269933, guid: 7a95e7ddb36e8204b95c53dbcb13daa8, type: 3}
+  m_PrefabInstance: {fileID: 8994165478689744035}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2024006146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1005,6 +1021,14 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1451575996}
+    - target: {fileID: 4205386594901664731, guid: 46c7f41b48c709a4f8b988536ce8339c, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1924615996}
+    - target: {fileID: 4205386594901664731, guid: 46c7f41b48c709a4f8b988536ce8339c, type: 3}
+      propertyPath: uiManagerCanvas
+      value: 
+      objectReference: {fileID: 1924616000}
     - target: {fileID: 4620776268053187802, guid: 46c7f41b48c709a4f8b988536ce8339c, type: 3}
       propertyPath: m_Name
       value: TowerButton
@@ -1181,6 +1205,10 @@ PrefabInstance:
       value: BasicTower
       objectReference: {fileID: 0}
     - target: {fileID: 111884306812362724, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111884306812362724, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
       propertyPath: m_TagString
       value: Tower
       objectReference: {fileID: 0}
@@ -1228,6 +1256,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6362864919171963388, guid: 8b38aa7ac7268fc4cb71eefb5a5f851b, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1924615996}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1318,6 +1350,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 992661816765952859, guid: 7a95e7ddb36e8204b95c53dbcb13daa8, type: 3}
+      propertyPath: currMoney
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2312114743068553763, guid: 7a95e7ddb36e8204b95c53dbcb13daa8, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 502
