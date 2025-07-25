@@ -31,6 +31,7 @@ public class BasicTower : MonoBehaviour
     [SerializeField] public float damage = 20f; //damage of each bullet
     [SerializeField] public float damageModifier = 1.25f; //what the damage increases by
     [SerializeField] public bool freezable = true;
+    private int frozen = 0;
 
     public List<Star> trackingStars; //list of currently tracked stars
     private Transform target; //current star being tracked
@@ -64,13 +65,13 @@ public class BasicTower : MonoBehaviour
 
         if (target != null && Time.time >= lastFireTime + fireCooldown)
         {
-            float angle = MathF.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+            float angle = MathF.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bullet = Instantiate(projectilePrefab, rotationPoint.position, targetRotation);
             bullet.GetComponent<BulletScript>().dmg = damage;
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
-            rb.linearVelocity = target.transform.position * projectileSpeed;
+            rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileSpeed;
             lastFireTime = Time.time;
         }
     }
@@ -146,13 +147,11 @@ public class BasicTower : MonoBehaviour
 
     public void CloseUpgrader()
     {
-        Debug.Log("Closing");
         upgradeScreen.SetActive(false);
     }
 
     void OnMouseDown()
     {
-        Debug.Log("You clicked the tower");
         if (!upgradeScreen.activeSelf)
         {
             if (currentUpgrade == 0)
@@ -190,8 +189,9 @@ public class BasicTower : MonoBehaviour
 
     public void StackFrost(float duration, float modifier)
     {
-        if (freezable)
+        if (freezable && frozen < 3)
         {
+            frozen += 1;
             StartCoroutine(SetCooldown(duration, modifier));
         }
     }
@@ -201,5 +201,6 @@ public class BasicTower : MonoBehaviour
         fireCooldown *= modifier;
         yield return new WaitForSeconds(duration);
         fireCooldown /= modifier;
+        frozen -= 1;
     }
 }
