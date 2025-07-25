@@ -44,6 +44,9 @@ public class BasicTower : MonoBehaviour
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
     public int[] upgradeLevels = new int[] { 1, 1, 1 };
     [SerializeField] public int currentCost = 25;
+
+    public AudioSource source;
+    public AudioClip clip;
     
 
     void Start()
@@ -79,6 +82,7 @@ public class BasicTower : MonoBehaviour
             rb.freezeRotation = true;
             rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileSpeed;
             lastFireTime = Time.time;
+            source.PlayOneShot(clip);
         }
 
         if (upgradeScreen.activeSelf)
