@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI health;
     [SerializeField] private TextMeshProUGUI waveNum;
 
+    [SerializeField] private Button nextWave;
+
     //stat vars
     public int currMoney = 100;
     public int currHealth = 10;
@@ -25,6 +27,7 @@ public class UIManager : MonoBehaviour
         pause.gameObject.SetActive(true);
         resume.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
+        nextWave.gameObject.SetActive(false);
 
         money.text = currMoney.ToString();
         health.text = currHealth.ToString();
