@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   numStars: 5
-  spawnDelay: 0
-  speed: 1
+  spawnDelay: 1
+  speed: 10

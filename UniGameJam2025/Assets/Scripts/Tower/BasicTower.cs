@@ -40,7 +40,7 @@ public class BasicTower : MonoBehaviour
 
     public List<Star> trackingStars; //list of currently tracked stars
     public Transform target; //current star being tracked
-    private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
+    public int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
     public int[] upgradeLevels = new int[] { 1, 1, 1 };
     [SerializeField] public int currentCost = 25;
@@ -194,7 +194,7 @@ public class BasicTower : MonoBehaviour
         if (!upgradeScreen.activeSelf)
         {
             towerHandler.SwapTower(this);
-            
+
             //display attack radius
             lineRenderer.enabled = true;
 

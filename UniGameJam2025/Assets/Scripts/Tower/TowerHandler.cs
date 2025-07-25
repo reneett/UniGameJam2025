@@ -88,4 +88,15 @@ public class TowerHandler : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         speedText.text = currentActive.upgradeLevels[1].ToString();
         damageText.text = currentActive.upgradeLevels[2].ToString();
     }
+
+    public void Reroll()
+    {
+        if (currentActive != null && uiManager.currMoney >= 5)
+        {
+            uiManager.changeMoney(-5);
+            currentActive.currentUpgrade = 0;
+            currentActive.CloseUpgrader();
+            currentActive.Clicked();
+        }
+    }
 }
