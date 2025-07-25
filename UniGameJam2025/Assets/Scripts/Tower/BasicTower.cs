@@ -36,7 +36,7 @@ public class BasicTower : MonoBehaviour
     private int frozen = 0;
 
     public List<Star> trackingStars; //list of currently tracked stars
-    private Transform target; //current star being tracked
+    public Transform target; //current star being tracked
     private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
 
@@ -44,16 +44,8 @@ public class BasicTower : MonoBehaviour
     void Start()
     {
         target = null;
-        detectionCollider = GetComponent<CircleCollider2D>();
+        detectionCollider.radius = radius;
 
-        if (detectionCollider != null)
-        {
-            detectionCollider.radius = radius;
-        }
-        else
-        {
-            Debug.LogError("CircleCollider not found on this GameObject.");
-        }
         upgradeButton.onClick.AddListener(UpgradeController);
         closeButton.onClick.AddListener(CloseUpgrader);
 
@@ -190,29 +182,6 @@ public class BasicTower : MonoBehaviour
             upgradeScreen.SetActive(true);
         }
 
-    }
-
-    //when a star enters the trigger collider, add it to the list of stars being tracked
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Star"))
-        {
-            Star star = collision.GetComponent<Star>();
-            trackingStars.Add(star);
-        }
-    }
-
-    //when a star exists the trigger collider, remove it from the list of stars being tracked
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Star"))
-        {
-            Star star = collision.GetComponent<Star>();
-            if (trackingStars.Contains(star))
-            {
-                trackingStars.Remove(star);
-            }
-        }
     }
 
     public void StackFrost(float duration, float modifier)
