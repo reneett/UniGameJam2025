@@ -12,6 +12,8 @@ public class BasicTower : MonoBehaviour
 
     public Transform rotationPoint;
 
+
+    [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private GameObject upgradeScreen;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TMPro.TextMeshProUGUI upgradeText;
@@ -31,9 +33,10 @@ public class BasicTower : MonoBehaviour
     [SerializeField] public float damage = 20f; //damage of each bullet
     [SerializeField] public float damageModifier = 1.25f; //what the damage increases by
     [SerializeField] public bool freezable = true;
+    private int frozen = 0;
 
     public List<Star> trackingStars; //list of currently tracked stars
-    private Transform target; //current star being tracked
+    public Transform target; //current star being tracked
     private int currentUpgrade = 0; // 1: Radius, 2: Speed, 3: Damage
     private String[] upgrades = new string[] { "Radius", "Speed", "Damage" };
 
@@ -41,19 +44,18 @@ public class BasicTower : MonoBehaviour
     void Start()
     {
         target = null;
-        detectionCollider = GetComponent<CircleCollider2D>();
+        detectionCollider.radius = radius;
 
-        if (detectionCollider != null)
-        {
-            detectionCollider.radius = radius;
-        }
-        else
-        {
-            Debug.LogError("CircleCollider not found on this GameObject.");
-        }
         upgradeButton.onClick.AddListener(UpgradeController);
         closeButton.onClick.AddListener(CloseUpgrader);
 
+        //radius visual setup
+        lineRenderer.positionCount = 500 + 1; // +1 to close the circle
+        lineRenderer.loop = true;
+        lineRenderer.useWorldSpace = false; // local positions
+        lineRenderer.startColor = Color.green;
+        lineRenderer.endColor = Color.green;
+        DrawRadius();
     }
 
     // Update is called once per frame
@@ -64,13 +66,13 @@ public class BasicTower : MonoBehaviour
 
         if (target != null && Time.time >= lastFireTime + fireCooldown)
         {
-            float angle = MathF.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
+            float angle = MathF.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bullet = Instantiate(projectilePrefab, rotationPoint.position, targetRotation);
             bullet.GetComponent<BulletScript>().dmg = damage;
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.freezeRotation = true;
-            rb.linearVelocity = target.transform.position * projectileSpeed;
+            rb.linearVelocity = (target.transform.position - transform.position).normalized * projectileSpeed;
             lastFireTime = Time.time;
         }
     }
@@ -142,19 +144,36 @@ public class BasicTower : MonoBehaviour
     private void UpdateCollider()
     {
         detectionCollider.radius = radius;
+        DrawRadius();
+    }
+
+    //redraws the detection radius
+    public void DrawRadius()
+    {
+        float angleStep = 360f / 500;
+        for (int i = 0; i <= 500; i++)
+        {
+            float angle = Mathf.Deg2Rad * i * angleStep;
+            float x = Mathf.Cos(angle) * radius;
+            float y = Mathf.Sin(angle) * radius;
+            lineRenderer.SetPosition(i, new Vector3(x, y, 0));
+        }
     }
 
     public void CloseUpgrader()
     {
-        Debug.Log("Closing");
         upgradeScreen.SetActive(false);
+        lineRenderer.enabled = false;
     }
 
-    void OnMouseDown()
+    //opens the upgrade screen when selected
+    public void Clicked()
     {
-        Debug.Log("You clicked the tower");
         if (!upgradeScreen.activeSelf)
         {
+            //display attack radius
+            lineRenderer.enabled = true;
+
             if (currentUpgrade == 0)
             {
                 currentUpgrade = UnityEngine.Random.Range(1, 4);
@@ -165,33 +184,11 @@ public class BasicTower : MonoBehaviour
 
     }
 
-    //when a star enters the trigger collider, add it to the list of stars being tracked
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Star"))
-        {
-            Star star = collision.GetComponent<Star>();
-            trackingStars.Add(star);
-        }
-    }
-
-    //when a star exists the trigger collider, remove it from the list of stars being tracked
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Star"))
-        {
-            Star star = collision.GetComponent<Star>();
-            if (trackingStars.Contains(star))
-            {
-                trackingStars.Remove(star);
-            }
-        }
-    }
-
     public void StackFrost(float duration, float modifier)
     {
-        if (freezable)
+        if (freezable && frozen < 3)
         {
+            frozen += 1;
             StartCoroutine(SetCooldown(duration, modifier));
         }
     }
@@ -201,5 +198,6 @@ public class BasicTower : MonoBehaviour
         fireCooldown *= modifier;
         yield return new WaitForSeconds(duration);
         fireCooldown /= modifier;
+        frozen -= 1;
     }
 }
