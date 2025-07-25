@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4beb4404a3db7d644bbc0d5d83bfd886
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202389
+  packageName: Cute GUI-Pack-Lite
+  packageVersion: 1.0.0
+  assetPath: Assets/Cute-GUI-Pack-Lite/DemoScenes/ViewCamera.renderTexture
+  uploadId: 451565
