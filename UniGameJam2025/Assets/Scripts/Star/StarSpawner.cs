@@ -33,6 +33,11 @@ public class StarSpawner : MonoBehaviour
         }
     }
 
+    public void SpawnNextWave()
+    {
+        StartCoroutine(SpawnStars());
+    }
+
     private void SpawnStar()
     {
         int rand = Random.Range(0, enemyPrefabs.Count);
